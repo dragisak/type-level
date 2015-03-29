@@ -1,5 +1,10 @@
 package com.dragisak.typelevel
 
+/**
+ * Heterogeneous list.
+ *
+ * Stick anything in it and it will preserve type information.
+ */
 object HList {
 
   sealed trait HList {
