@@ -1,6 +1,6 @@
 organization := "com.dragisak"
 
-name := "hlist"
+name := "type-level"
 
 version := "1.0"
 
