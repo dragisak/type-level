@@ -25,7 +25,7 @@ Natural numbers:
 ```scala
 import com.dragisak.typelevel.Nat._
 
-type x = Nat8#plus[Nat2] 
+type Nat13 = Nat8#plus[Nat5] 
 ```
 
 ## List [+A, Size <: Nat]
