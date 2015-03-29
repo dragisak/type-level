@@ -21,8 +21,26 @@ val b = l.tail.head
 ## Nat
 
 Natural numbers:
+
 ```scala
 import com.dragisak.typelevel.Nat._
 
 type x = Nat8#plus[Nat2] 
+```
+
+## List[+A, Size <: Nat]
+
+List with size information encoded in it's type:
+ 
+```scala
+import com.dragisak.typelevel.List._
+import com.dragisak.typelevel.Nat._
+
+val l = 1 :: 2 :: 3 :: Nil
+
+val l3 :List[Int, Nat3] = l
+
+// does not compile, requires list of size 2
+val l2 :List[Int, Nat2] = l
+
 ```
