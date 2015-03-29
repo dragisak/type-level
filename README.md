@@ -28,7 +28,7 @@ import com.dragisak.typelevel.Nat._
 type x = Nat8#plus[Nat2] 
 ```
 
-## List[+A, Size <: Nat]
+## List [+A, Size <: Nat]
 
 List with size information encoded in it's type:
  
