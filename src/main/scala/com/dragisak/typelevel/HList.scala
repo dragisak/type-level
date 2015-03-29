@@ -17,6 +17,8 @@ object HList {
 
     def ::[A](a: A): prepend[A]
     def :::[L <: HList](l: L): L#appendL[_ <: HList ]
+
+    def reverse: HList
   }
 
   case class HCons[H, Tail <: HList](head: H, tail: Tail) extends HList {
@@ -29,6 +31,8 @@ object HList {
 
     override def ::[A](a: A): prepend[A] = HCons(a, this)
     override def :::[L <: HList](l: L): L#appendL[HCons[H, Tail]] = l ++ this
+
+    override def reverse = tail.reverse + head
   }
 
   case object HNil extends HList {
@@ -41,6 +45,8 @@ object HList {
 
     override def ::[A](a: A): prepend[A] = HCons(a, this)
     override def :::[L <: HList](l: L): L#appendL[HNil.type ] = l ++ HNil
+
+    override val reverse = HNil
   }
 
 }

@@ -15,6 +15,8 @@ object List {
     def :::[B >: A, S <: Nat](l: List[B, S]): List[B, S#plus[Size]]
 
     def map[B](f: A => B): List[B, Size]
+
+    def reverse: List[A, Size]
   }
 
 
@@ -26,6 +28,8 @@ object List {
     override def :::[B >: A, S <: Nat](l: List[B, S]): List[B, S#plus[NatN[TailSize]]] = l ++ this
 
     override def map[B](f: A => B): List[B, NatN[TailSize]] = Cons(f(head), tail.map(f))
+
+    override def reverse = tail.reverse + head
   }
 
   case object Nil extends List[Nothing, Nat0] {
@@ -36,5 +40,7 @@ object List {
     override def :::[A, S <: Nat](l: List[A, S]): List[A, S#plus[Nat0]] = l ++ Nil
 
     override def map[B](f: Nothing => B): List[B, Nat0] = Nil
+
+    override val reverse = Nil
   }
 }
