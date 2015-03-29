@@ -1,4 +1,4 @@
-package com.dragisak.hlist
+package com.dragisak.typelevel
 
 object HList {
 
