@@ -1,4 +1,4 @@
-# Some examples of type level programming in Scala
+# Examples of type level programming in Scala
 
 [![Build Status](https://travis-ci.org/dragisak/type-level.svg?branch=master)](https://travis-ci.org/dragisak/type-level)
 
