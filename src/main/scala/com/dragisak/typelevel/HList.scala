@@ -49,4 +49,6 @@ object HList {
     override val reverse = HNil
   }
 
+  type HNil = HNil.type
+
 }
