@@ -36,15 +36,15 @@ object HList {
   }
 
   case object HNil extends HList {
-    override type prepend[A] = HCons[A, HNil.type]
-    override type append[A] = HCons[A, HNil.type]
+    override type prepend[A] = HCons[A, HNil]
+    override type append[A] = HCons[A, HNil]
     override type appendL[L <: HList] = L
 
     override def +[A](a: A): append[A] = HCons(a, HNil)
     override def ++[L <: HList](l: L): L = l
 
     override def ::[A](a: A): prepend[A] = HCons(a, this)
-    override def :::[L <: HList](l: L): L#appendL[HNil.type ] = l ++ HNil
+    override def :::[L <: HList](l: L): L#appendL[HNil] = l ++ HNil
 
     override val reverse = HNil
   }
