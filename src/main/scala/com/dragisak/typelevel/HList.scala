@@ -18,6 +18,9 @@ object HList {
     def ::[A](a: A): prepend[A]
     def :::[L <: HList](l: L): L#appendL[_ <: HList ]
 
+    def take(n: Int): HList
+    def drop(n: Int): HList
+
     def reverse: HList
   }
 
@@ -32,6 +35,24 @@ object HList {
     override def ::[A](a: A): prepend[A] = HCons(a, this)
     override def :::[L <: HList](l: L): L#appendL[HCons[H, Tail]] = l ++ this
 
+
+    override def take(n: Int): HList = {
+      require(n >= 0, "Can't take negative count")
+      n match {
+        case 0 => HNil
+        case j => head :: tail.take(j-1)
+      }
+    }
+
+    override def drop(n: Int): HList = {
+      require(n >= 0, "Can't drop negative count")
+      n match {
+        case 0 => this
+        case j => tail.drop(j-1)
+      }
+
+    }
+
     override def reverse = tail.reverse + head
   }
 
@@ -45,6 +66,11 @@ object HList {
 
     override def ::[A](a: A): prepend[A] = HCons(a, this)
     override def :::[L <: HList](l: L): L#appendL[HNil] = l ++ HNil
+
+
+    override def take(n: Int): HList = HNil
+
+    override def drop(n: Int): HList = HNil
 
     override val reverse = HNil
   }
