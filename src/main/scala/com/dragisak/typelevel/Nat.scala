@@ -8,14 +8,18 @@ object Nat {
 
   sealed trait Nat {
     type plus[N <: Nat] <: Nat
+    type mul[N <: Nat] <: Nat
   }
 
   sealed trait NatN[Prev <: Nat] extends Nat {
     override type plus[N <: Nat] = NatN[Prev#plus[N]]
+    override type mul[N <: Nat] = Prev#mul[N]#plus[N]
+
   }
 
   sealed trait Nat0 extends Nat {
     override type plus[N <: Nat] = N
+    override type mul[N <: Nat] = Nat0
   }
 
   type Nat1 = NatN[Nat0]
