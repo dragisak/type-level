@@ -5,10 +5,14 @@ package com.dragisak.typelevel
  */
 object Nat {
 
+  import Iffy._
+
+  implicit def eqT[N1 <: Nat, N2 =:= N1]
 
   sealed trait Nat {
     type plus[N <: Nat] <: Nat
     type mul[N <: Nat] <: Nat
+    type eq[N <: Nat] <: Iffy
   }
 
   sealed trait NatN[Prev <: Nat] extends Nat {
@@ -20,6 +24,7 @@ object Nat {
   sealed trait Nat0 extends Nat {
     override type plus[N <: Nat] = N
     override type mul[N <: Nat] = Nat0
+    override type eq[N <: Nat] = this.type
   }
 
   type Nat1 = NatN[Nat0]
