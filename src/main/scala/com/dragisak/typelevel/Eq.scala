@@ -12,5 +12,6 @@ object Eq {
 
   implicit def eqN[N <: Nat]: Eq[NatN[N], NatN[N]] = Eq[NatN[N], NatN[N]]
 
+  def isEq[N1 <: Nat, N2 <: Nat](implicit eq: Eq[N1, N2]): Boolean = true
 
 }

@@ -9,16 +9,16 @@ class EqSpec extends WordSpec with Matchers {
   "Eq" should {
 
     "two same nats should compile" in {
-      def foo0(implicit eq: Eq[Nat0, Nat0]): Unit = ()
-      def foo1(implicit eq: Eq[Nat1, Nat1]): Unit = ()
-      def foo2(implicit eq: Eq[Nat2, Nat2]): Unit = ()
-      def foo3(implicit eq: Eq[Nat3, Nat3]): Unit = ()
+      isEq[Nat0, Nat0]
+      isEq[Nat1, Nat1]
+      isEq[Nat2, Nat2]
     }
 
     "two different nats should not compile" in {
-      def foo0(implicit eq: Eq[Nat0, Nat1]): Unit = ()
-      def foo1(implicit eq: Eq[Nat1, Nat0]): Unit = ()
-      def foo2(implicit eq: Eq[Nat1, Nat2]): Unit = ()
+      "isEq[Nat0, Nat1]" shouldNot typeCheck
+      "isEq[Nat1, Nat0]" shouldNot typeCheck
+      "isEq[Nat2, Nat3]" shouldNot typeCheck
+      "isEq[Nat5, Nat3]" shouldNot typeCheck
 
     }
   }
