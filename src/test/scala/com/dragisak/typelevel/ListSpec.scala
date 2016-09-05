@@ -1,7 +1,6 @@
 package com.dragisak.typelevel
 
 import org.scalatest._
-import List._
 import Nat._
 
 class ListSpec extends WordSpec with Matchers {
@@ -10,12 +9,12 @@ class ListSpec extends WordSpec with Matchers {
 
     "should compile if types match" in {
 
-      val a: List[Int, Nat2] = 1 :: 2 :: Nil
+      val a: NList[Int, Nat2] = 1 :: 2 :: NNil
 
     }
 
     "not compile if sizes mismatch" in {
-      "val a: List[Int, Nat2] = 1 :: 2 :: 3 :: Nil" shouldNot typeCheck
+      "val a: NList[Int, Nat2] = 1 :: 2 :: 3 :: Nil" shouldNot typeCheck
     }
   }
 

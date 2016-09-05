@@ -14,5 +14,16 @@ scalacOptions ++= Seq(
   "-feature",
   "-language:higherKinds",
   "-language:postfixOps",
-  "-language:implicitConversions"
+  "-language:implicitConversions",
+  "-language:existentials",
+  "-deprecation",
+  "-encoding", "UTF-8", // yes, this is 2 args
+  "-unchecked",
+  "-Xfatal-warnings",
+  "-Yno-adapted-args",
+  "-Ywarn-dead-code", // N.B. doesn't work well with the ??? hole
+  "-Ywarn-numeric-widen",
+  "-Ywarn-value-discard",
+  "-Ywarn-unused-import",
+  "-Xfuture"
 )
