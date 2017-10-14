@@ -1,9 +1,9 @@
 package com.dragisak.typelevel
 
-import org.scalatest._
-import HList._
+import org.scalatest.WordSpec
+import org.scalatest.Matchers._
 
-class HListSpec extends WordSpec with Matchers {
+class HListSpec extends WordSpec {
 
   "HList" when {
 

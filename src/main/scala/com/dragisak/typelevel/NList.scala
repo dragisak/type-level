@@ -7,6 +7,9 @@ import com.dragisak.typelevel.Nat._
  */
 
 sealed trait NList[+A, Size <: Nat] {
+
+  type size = Size
+
   def +[B >: A](a: B): NList[B, NatN[Size]]
   def ++[B >: A, S <: Nat](l: NList[B, S]): NList[B, Size#plus[S]]
 
