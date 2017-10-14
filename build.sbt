@@ -4,11 +4,13 @@ name := "type-level"
 
 version := "1.0"
 
-scalaVersion := "2.12.2"
+scalaVersion := "2.12.3"
 
 libraryDependencies ++= Seq(
   "org.scalatest"     %% "scalatest"      % "3.0.1"             % Test
 )
+
+addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.4")
 
 scalacOptions ++= Seq(
   "-feature",
@@ -21,11 +23,6 @@ scalacOptions ++= Seq(
   "-unchecked",
   "-Xfatal-warnings",
   "-Yno-adapted-args",
-  "-Ywarn-dead-code", // N.B. doesn't work well with the ??? hole
-  "-Ywarn-numeric-widen",
-  "-Ywarn-inaccessible",
-  "-Ywarn-dead-code",
-  "-Ywarn-value-discard",
-  "-Ywarn-unused-import",
-  "-Xfuture"
+  "-Ypartial-unification"
 )
+
