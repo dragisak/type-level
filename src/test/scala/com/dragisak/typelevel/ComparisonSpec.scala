@@ -8,7 +8,7 @@ class ComparisonSpec extends WordSpec {
 
   "Eq" should {
 
-    def takesListsOfEqualLength[N1 <: Nat, N2 <: Nat](l1: NList[Int, N1], l2: NList[Int, N2])(implicit eq: N1 Eq N2) = true
+    def takesListsOfEqualLength[N1 <: Nat, N2 <: Nat](l1: NList[Int, N1], l2: NList[Int, N2])(implicit eq: N1 :==: N2) = true
 
     "should compile if same length" in {
 
@@ -31,7 +31,7 @@ class ComparisonSpec extends WordSpec {
 
   "Lt" should {
 
-    def firstListMustBeShorter[N1 <: Nat, N2 <: Nat](l1: NList[Int, N1], l2: NList[Int, N2])(implicit lt: N1 Lt N2) = true
+    def firstListMustBeShorter[N1 <: Nat, N2 <: Nat](l1: NList[Int, N1], l2: NList[Int, N2])(implicit lt: N1 :<: N2) = true
 
     "should compile if first is shorter" in {
 
@@ -63,7 +63,7 @@ class ComparisonSpec extends WordSpec {
 
   "Gt" should {
 
-    def firstListMustBeLonger[N1 <: Nat, N2 <: Nat](l1: NList[Int, N1], l2: NList[Int, N2])(implicit gt: N1 Gt N2) = true
+    def firstListMustBeLonger[N1 <: Nat, N2 <: Nat](l1: NList[Int, N1], l2: NList[Int, N2])(implicit gt: N1 :>: N2) = true
 
     "should compile if first is shorter" in {
 

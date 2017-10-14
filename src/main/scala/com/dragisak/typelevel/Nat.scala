@@ -19,6 +19,11 @@ sealed trait Nat0 extends Nat {
   override type mul[N <: Nat] = Nat0
 }
 
+
+trait NatInt[N <: Nat] {
+  def value: Int
+}
+
 object Nat {
 
   type Nat1 = NatN[Nat0]
@@ -31,5 +36,14 @@ object Nat {
   type Nat8 = NatN[Nat7]
   type Nat9 = NatN[Nat8]
 
-}
 
+  implicit object NatInt0 extends NatInt[Nat0]  {
+    override val value: Int = 0
+  }
+
+  implicit def natIntN[N <: Nat](implicit n: NatInt[N]): NatInt[NatN[N]] = new NatInt[NatN[N]]{
+    override val value: Int = n.value + 1
+  }
+
+  implicit def toInt[N <: Nat](n: NatInt[N]): Int = n.value
+}
