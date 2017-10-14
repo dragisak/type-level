@@ -6,9 +6,9 @@ import Nat._
 
 class NatSpec extends WordSpec {
 
-  "Nat converts to Int" in {
+  "toInt converts Nat to Int" in {
 
-    implicitly[NatInt[Nat9]] should be(9)
+    toInt[Nat9] should be(9)
 
   }
 

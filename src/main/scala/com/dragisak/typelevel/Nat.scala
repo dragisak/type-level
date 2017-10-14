@@ -45,5 +45,5 @@ object Nat {
     override val value: Int = n.value + 1
   }
 
-  implicit def toInt[N <: Nat](n: NatInt[N]): Int = n.value
+  implicit def toInt[N <: Nat](implicit n: NatInt[N]): Int = n.value
 }
