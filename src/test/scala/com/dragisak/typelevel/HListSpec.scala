@@ -26,7 +26,6 @@ class HListSpec extends WordSpec {
       }
     }
 
-
     "taking" should {
       "take 2" in {
         val l1 = 1 :: "foo" :: true :: HNil
@@ -80,6 +79,14 @@ class HListSpec extends WordSpec {
       "throw exception if negative count" in {
         val l1 = 1 :: "foo" :: true :: HNil
         an[IllegalArgumentException] shouldBe thrownBy(l1.drop(-1))
+      }
+    }
+
+    "size" should {
+      import NatToInt._
+      "be correct" in {
+        val l1 = 1 :: "foo" :: true :: Some(1L) :: HNil
+        toInt[l1.size] should be(4)
       }
     }
 
