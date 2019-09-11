@@ -11,6 +11,7 @@ object FieldType {
   sealed trait Id                   extends FieldType
   sealed trait Text                 extends FieldType
   sealed trait Flag                 extends FieldType
+  sealed trait Money                extends FieldType
   sealed trait Coll[T <: FieldType] extends FieldType
 
 }
@@ -35,22 +36,31 @@ object EntityDef {
 object Metadata {
 
   trait Entity {
-    type FieldGroup <: FieldDef[_, _]
+    sealed trait FieldGroup[T <: FieldType, M <: Mandatory] extends FieldDef[T, M]
     type Fields <: HList
-    final type Def = EntityDef[Fields, FieldGroup]
+    final type Def = EntityDef[Fields, FieldGroup[_, _]]
     def value: Def
   }
 
 //  def entityValue[T <: Entity](implicit ev: T#Fields <<: T#FieldGroup): T#Def = EntityDef[T#Fields, T#FieldGroup](ev)
 
   object Organization extends Entity {
-    sealed trait OrgField[T <: FieldType, M <: Mandatory] extends FieldDef[T, M]
-    override type FieldGroup = OrgField[_, _]
-    type Id                  = OrgField[FieldType.Id, Mandatory.Yes]
-    type Name                = OrgField[FieldType.Text, Mandatory.Yes]
-    type Founders            = OrgField[FieldType.Coll[FieldType.Id], Mandatory.No]
-    override type Fields     = Id :: Name :: Founders :: HNil
-    override val value: Def = EntityDef[Fields, FieldGroup]
+    type Id              = FieldGroup[FieldType.Id, Mandatory.Yes]
+    type Name            = FieldGroup[FieldType.Text, Mandatory.Yes]
+    type Founders        = FieldGroup[FieldType.Coll[FieldType.Id], Mandatory.No]
+    override type Fields = Id :: Name :: Founders :: HNil
+
+    override val value: Def = EntityDef[Fields, FieldGroup[_, _]]
   }
 
+  object FundingRound extends Entity {
+    type Id              = FieldGroup[FieldType.Id, Mandatory.Yes]
+    type Round           = FieldGroup[FieldType.Text, Mandatory.Yes]
+    type Amount          = FieldGroup[FieldType.Money, Mandatory.Yes]
+    type Investors       = FieldGroup[FieldType.Coll[FieldType.Id], Mandatory.No]
+    type Investee        = FieldGroup[FieldType.Id, Mandatory.No]
+    override type Fields = Id :: Round :: Amount :: Investee :: Investors :: HNil
+
+    override val value: Def = EntityDef[Fields, FieldGroup[_, _]]
+  }
 }
