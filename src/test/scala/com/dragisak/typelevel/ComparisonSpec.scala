@@ -5,10 +5,10 @@ import org.scalatest.Matchers._
 
 class ComparisonSpec extends WordSpec {
 
-
   "Eq" should {
 
-    def takesListsOfEqualLength[N1 <: Nat, N2 <: Nat](l1: NList[Int, N1], l2: NList[Int, N2])(implicit eq: N1 :==: N2) = true
+    def takesListsOfEqualLength[N1 <: Nat, N2 <: Nat](l1: NList[Int, N1], l2: NList[Int, N2])(implicit eq: N1 == N2) =
+      true
 
     "should compile if same length" in {
 
@@ -16,7 +16,6 @@ class ComparisonSpec extends WordSpec {
       val b = 3 :: 4 :: NNil
 
       takesListsOfEqualLength(a, b) shouldBe true
-
 
     }
 
@@ -31,7 +30,8 @@ class ComparisonSpec extends WordSpec {
 
   "Lt" should {
 
-    def firstListMustBeShorter[N1 <: Nat, N2 <: Nat](l1: NList[Int, N1], l2: NList[Int, N2])(implicit lt: N1 :<: N2) = true
+    def firstListMustBeShorter[N1 <: Nat, N2 <: Nat](l1: NList[Int, N1], l2: NList[Int, N2])(implicit lt: N1 < N2) =
+      true
 
     "should compile if first is shorter" in {
 
@@ -60,14 +60,13 @@ class ComparisonSpec extends WordSpec {
 
   }
 
-
   "Gt" should {
 
-    def firstListMustBeLonger[N1 <: Nat, N2 <: Nat](l1: NList[Int, N1], l2: NList[Int, N2])(implicit gt: N1 :>: N2) = true
+    def firstListMustBeLonger[N1 <: Nat, N2 <: Nat](l1: NList[Int, N1], l2: NList[Int, N2])(implicit gt: N1 > N2) = true
 
     "should compile if first is shorter" in {
 
-      val a = 1 :: 2 :: 3 ::NNil
+      val a = 1 :: 2 :: 3 :: NNil
       val b = 3 :: 4 :: NNil
 
       firstListMustBeLonger(a, b) shouldBe true
