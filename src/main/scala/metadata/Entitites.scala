@@ -37,7 +37,7 @@ object Metadata {
   trait Entity {
     type FieldGroup <: FieldDef[_, _]
     type Fields <: HList
-    type Def = EntityDef[Fields, FieldGroup]
+    final type Def = EntityDef[Fields, FieldGroup]
     def value: Def
   }
 
