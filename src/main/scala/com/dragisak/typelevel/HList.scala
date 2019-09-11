@@ -61,6 +61,7 @@ case class HCons[H, Tail <: HList](head: H, tail: Tail) extends HList {
 
 object HList {
 
-  type HNil = HNil.type
+  type HNil              = HNil.type
+  type ::[A, H <: HList] = H#prepend[A]
 
 }
