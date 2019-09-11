@@ -7,6 +7,7 @@ version := "1.0"
 scalaVersion := "2.13.0"
 
 libraryDependencies ++= List(
+  "com.chuusai"   %% "shapeless" % "2.3.3",
   "org.scalatest" %% "scalatest" % "3.0.8" % Test
 )
 
